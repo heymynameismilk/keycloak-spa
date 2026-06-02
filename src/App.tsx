@@ -4,6 +4,8 @@ import {
   MastheadMain,
   MastheadBrand,
   MastheadContent,
+  MastheadToggle,
+  PageToggleButton,
   Toolbar,
   ToolbarContent,
   ToolbarItem,
@@ -11,9 +13,12 @@ import {
   Nav,
   NavList,
   NavItem,
+  PageSidebar,
+  PageSidebarBody,
   Spinner,
   Bullseye,
 } from '@patternfly/react-core';
+import BarsIcon from '@patternfly/react-icons/dist/esm/icons/bars-icon';
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import { useKeycloak } from './KeycloakProvider';
 import { ProtectedRoute } from './components/ProtectedRoute';
@@ -34,36 +39,23 @@ export default function App() {
     );
   }
 
-  const nav = (
-    <Nav variant="horizontal">
-      <NavList>
-        <NavItem isActive={pathname === '/'} itemId="home">
-          <Link to="/">Главная</Link>
-        </NavItem>
-        <NavItem isActive={pathname === '/secret'} itemId="secret">
-          <Link to="/secret">Защищённый раздел</Link>
-        </NavItem>
-      </NavList>
-    </Nav>
-  );
-
   const header = (
     <Masthead>
+      <MastheadToggle>
+        <PageToggleButton variant="plain" aria-label="Global navigation">
+          <BarsIcon />
+        </PageToggleButton>
+      </MastheadToggle>
       <MastheadMain>
         <MastheadBrand>Keycloak SPA</MastheadBrand>
       </MastheadMain>
       <MastheadContent>
         <Toolbar>
           <ToolbarContent>
-            <ToolbarItem>{nav}</ToolbarItem>
             {authenticated && profile && (
-              <ToolbarItem align={{ default: 'alignRight' }}>
-                {profile.name || profile.username}
-              </ToolbarItem>
+              <ToolbarItem>{profile.name || profile.username}</ToolbarItem>
             )}
-            <ToolbarItem
-              align={authenticated && profile ? undefined : { default: 'alignRight' }}
-            >
+            <ToolbarItem align={{ default: 'alignRight' }}>
               {authenticated ? (
                 <Button variant="secondary" onClick={logout}>Выйти</Button>
               ) : (
@@ -76,8 +68,25 @@ export default function App() {
     </Masthead>
   );
 
+  const sidebar = (
+    <PageSidebar>
+      <PageSidebarBody>
+        <Nav>
+          <NavList>
+            <NavItem isActive={pathname === '/'} itemId="home">
+              <Link to="/">Главная</Link>
+            </NavItem>
+            <NavItem isActive={pathname === '/secret'} itemId="secret">
+              <Link to="/secret">Защищённый раздел</Link>
+            </NavItem>
+          </NavList>
+        </Nav>
+      </PageSidebarBody>
+    </PageSidebar>
+  );
+
   return (
-    <Page header={header}>
+    <Page header={header} sidebar={sidebar} isManagedSidebar>
       <div style={{ padding: '1rem 1rem 0' }}>
         <SessionExpiredAlert />
       </div>
