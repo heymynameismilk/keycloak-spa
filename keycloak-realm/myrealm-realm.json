@@ -58,7 +58,7 @@
           "temporary": false
         }
       ],
-      "realmRoles": ["app-user", "default-roles-myrealm"]
+      "realmRoles": ["app-user"]
     },
     {
       "username": "guest",
@@ -74,7 +74,7 @@
           "temporary": false
         }
       ],
-      "realmRoles": ["default-roles-myrealm"]
+      "realmRoles": []
     }
   ]
 }
