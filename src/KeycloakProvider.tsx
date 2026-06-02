@@ -50,7 +50,7 @@ export function KeycloakProvider({ children }: { children: ReactNode }) {
     };
     keycloak.onAuthRefreshSuccess = () => setProfile(readProfile());
     keycloak.onTokenExpired = () => {
-      keycloak.updateToken(30).catch(() => {
+      keycloak.updateToken(5).catch(() => {
         setSessionExpired(true);
         setAuthenticated(false);
         setProfile(null);
@@ -75,12 +75,12 @@ export function KeycloakProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (!authenticated) return;
     const id = window.setInterval(() => {
-      keycloak.updateToken(30).catch(() => {
+      keycloak.updateToken(5).catch(() => {
         setSessionExpired(true);
         setAuthenticated(false);
         setProfile(null);
       });
-    }, 10_000);
+    }, 3_000);
     return () => window.clearInterval(id);
   }, [authenticated]);
 
