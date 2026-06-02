@@ -2,6 +2,7 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import '@patternfly/react-core/dist/styles/base.css';
+import './styles.css';
 import { KeycloakProvider } from './KeycloakProvider';
 import App from './App';
 

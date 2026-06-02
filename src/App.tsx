@@ -4,8 +4,6 @@ import {
   MastheadMain,
   MastheadBrand,
   MastheadContent,
-  MastheadToggle,
-  PageToggleButton,
   Toolbar,
   ToolbarContent,
   ToolbarItem,
@@ -18,7 +16,6 @@ import {
   Spinner,
   Bullseye,
 } from '@patternfly/react-core';
-import BarsIcon from '@patternfly/react-icons/dist/esm/icons/bars-icon';
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import { useKeycloak } from './KeycloakProvider';
 import { ProtectedRoute } from './components/ProtectedRoute';
@@ -41,11 +38,6 @@ export default function App() {
 
   const header = (
     <Masthead>
-      <MastheadToggle>
-        <PageToggleButton variant="plain" aria-label="Global navigation">
-          <BarsIcon />
-        </PageToggleButton>
-      </MastheadToggle>
       <MastheadMain>
         <MastheadBrand>Keycloak SPA</MastheadBrand>
       </MastheadMain>
@@ -69,7 +61,7 @@ export default function App() {
   );
 
   const sidebar = (
-    <PageSidebar>
+    <PageSidebar isSidebarOpen>
       <PageSidebarBody>
         <Nav>
           <NavList>
@@ -86,7 +78,7 @@ export default function App() {
   );
 
   return (
-    <Page header={header} sidebar={sidebar} isManagedSidebar>
+    <Page header={header} sidebar={sidebar}>
       <div style={{ padding: '1rem 1rem 0' }}>
         <SessionExpiredAlert />
       </div>

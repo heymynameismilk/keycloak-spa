@@ -1,0 +1,15 @@
+.pf-v5-c-page__sidebar {
+  position: relative !important;
+  transform: none !important;
+  width: 16rem;
+  flex: 0 0 16rem;
+}
+
+.pf-v5-c-page__sidebar.pf-m-collapsed,
+.pf-v5-c-page__sidebar.pf-m-expanded {
+  transform: none !important;
+}
+
+.pf-v5-c-page__main {
+  margin-left: 0 !important;
+}
